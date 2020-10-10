@@ -1,0 +1,11 @@
+﻿{
+  "Input": {
+    "SourceType": "CONSOLE",
+    "Address": "c:\\toto"
+  },
+  "Output": {
+    "SourceType": "CONSOLE",
+    "Address": "c:\\toto"
+  },
+  "LogExchange": true
+}
