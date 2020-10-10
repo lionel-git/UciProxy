@@ -1,13 +1,13 @@
 ﻿
 Config:
 
-		--------
-		| GUI  |
-		--------
-		/       \
-	   /         \                  Other Machine
-	[ Proxy1 ]   [ Proxy2 ] <=====> [Proxy3]
-	[ Exe1 ]                        [Exe2]
+        --------
+        | GUI  |
+        --------
+        /       \
+       /         \                  Other Machine
+    [ Proxy1 ]   [ Proxy2 ] <=====> [Proxy3]
+    [ Exe1 ]                        [Exe2]
 
 - Proxy1
 input  = exe
