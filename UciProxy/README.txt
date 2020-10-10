@@ -23,3 +23,7 @@ output = network
 
 input/output type = console / exe / network
 A mettre en config (type + addresse)
+
+exe, adress = path to exe
+console, adress unused
+network, adress = machine:port
