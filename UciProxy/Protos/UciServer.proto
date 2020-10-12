@@ -1,0 +1,23 @@
+﻿syntax = "proto3";
+
+service Uci 
+{
+  rpc SendUciMessage (UciRequest) returns (UciReply) {}
+}
+
+enum DataType
+{
+	UNDEFINED = 0;
+	STDOUT = 1;
+	STDERR = 2;
+}
+
+message UciRequest 
+{
+	DataType data_type = 1;
+	string data = 2;
+}
+
+message UciReply
+{
+}

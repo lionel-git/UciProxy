@@ -12,6 +12,11 @@ namespace UciProxy
     {
         private static readonly ILog Logger = LogManager.GetLogger("UciProxy");
 
+        static void WaitForQuit()
+        {
+            while (Console.ReadKey(true).KeyChar != 'q') ;
+        }
+
         static void Main(string[] args)
         {
             try
@@ -19,12 +24,13 @@ namespace UciProxy
                 Logger.Info("Starting...");
                 var config = BaseConfig.LoadAll<Config>("DefaultConfig.json", args);
                 var uciProxyHandler = new UciProxyHandler(config);
-                uciProxyHandler.Run();
+                WaitForQuit();
+                uciProxyHandler.Stop();
                 Logger.Info("End.");
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
+                Logger.Error(e);
             }
         }
     }
