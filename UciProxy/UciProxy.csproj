@@ -79,10 +79,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Config.cs" />
-    <Compile Include="ConsoleSender.cs" />
+    <Compile Include="ConsoleWriter.cs" />
     <Compile Include="HandlerFactory.cs" />
     <Compile Include="IReceiver.cs" />
     <Compile Include="ISender.cs" />
+    <Compile Include="NetworkReceiver.cs" />
+    <Compile Include="NetworkSender.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Source.cs" />

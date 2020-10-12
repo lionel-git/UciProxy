@@ -23,8 +23,11 @@ namespace UciProxy
 
         private bool _stop;
 
+        private bool _logExchange;
+
         public UciProxyHandler(Config config)
         {
+            _logExchange = config.LogExchange;
             _lines = new ConcurrentQueue<UciRequest>();
 
             _stop = false;
@@ -35,12 +38,13 @@ namespace UciProxy
             // lines => output (ISender depend de Source output)
             _receiver = HandlerFactory.GetReceiver(config.Input, Receive);
             _sender = HandlerFactory.GetSender(config.Output);
-
         }
 
         void Receive(UciRequest r)
         {
             _lines.Enqueue(r);
+            if (_logExchange)
+                Logger.Info($"=> {r}");
         }
 
         public void Stop()

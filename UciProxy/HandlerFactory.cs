@@ -12,7 +12,7 @@ namespace UciProxy
                 case SourceType.EXECUTABLE:
                    return new SubProcessConsoleReader(source.Address, action);
                 case SourceType.NETWORK:
-                    return new SubProcessConsoleReader(source.Address, action);  // TODO network reader             
+                    return new NetworkReceiver(source.Port, action);
                 case SourceType.CONSOLE:
                     throw new NotImplementedException("Reading from console is not implemented");
                 default:
@@ -25,9 +25,9 @@ namespace UciProxy
             switch (source.SourceType)
             {
                 case SourceType.CONSOLE:
-                    return new ConsoleSender();
+                    return new ConsoleWriter();
                 case SourceType.NETWORK:
-                    return new ConsoleSender();
+                    return new NetworkSender(source.Address, source.Port);
                 case SourceType.EXECUTABLE:
                     throw new NotImplementedException("writing to executable  is not implemented");
                 default:
