@@ -19,6 +19,7 @@ namespace UciProxy
         public string Address { get; set; }
         
         // For network type only
-        public int Port { get; set; }
+        public int LocalPort { get; set; }
+        public int RemotePort { get; set; }
     }
 }

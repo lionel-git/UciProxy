@@ -12,7 +12,7 @@ namespace UciProxy
                 case SourceType.EXECUTABLE:
                    return new SubProcessConsoleReceiver(source.Address, action);
                 case SourceType.NETWORK:
-                    return new NetworkReceiver(source.Port, action);
+                    return new NetworkReceiver(source.LocalPort, action);
                 case SourceType.CONSOLE:
                     return new ConsoleReceiver(action);
                 default:
@@ -27,7 +27,7 @@ namespace UciProxy
                 case SourceType.CONSOLE:
                     return new ConsoleSender();
                 case SourceType.NETWORK:
-                    return new NetworkSender(source.Address, source.Port);
+                    return new NetworkSender(source.Address, source.RemotePort);
                 case SourceType.EXECUTABLE:
                     return new SubProcessConsoleSender(source.Address);
                 default:

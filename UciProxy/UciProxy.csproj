@@ -102,6 +102,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Configs\Network1.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Configs\Network2.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Configs\StockFish.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

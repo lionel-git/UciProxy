@@ -1,0 +1,13 @@
+﻿{
+  "Input": {
+    "SourceType": "NETWORK",
+    "Address": "localhost",
+    "LocalPort": 33002,
+    "RemotePort": 33001
+  },
+  "Output": {
+    "SourceType": "CONSOLE",
+    "Address": ""
+  },
+  "LogExchange": true
+}
