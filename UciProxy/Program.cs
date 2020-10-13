@@ -13,13 +13,6 @@ namespace UciProxy
     {
         private static readonly ILog Logger = LogManager.GetLogger("UciProxy");
 
-        static void WaitForQuit()
-        {
-            // A voir
-            Thread.Sleep(100_000_000);
-            //while (Console.ReadKey(false).KeyChar != '&') ;
-        }
-
         static void Main(string[] args)
         {
             try
@@ -30,7 +23,8 @@ namespace UciProxy
                 {
                     var uciProxyHandlerForward = new UciProxyHandler(config, false);
                     var uciProxyHandlerReverse = new UciProxyHandler(config, true);
-                    WaitForQuit();
+                    uciProxyHandlerForward.WaitReceiverExit();
+                    Logger.Info("Done Forward");
                     uciProxyHandlerForward.Stop();
                     uciProxyHandlerReverse.Stop();
                 }

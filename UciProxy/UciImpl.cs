@@ -9,16 +9,16 @@ namespace UciProxy
 {
     public class UciImpl : Uci.UciBase
     {
-        private Action<UciRequest> _action;
+        private Action<UciRequest, string> _action;
 
-        public UciImpl(Action<UciRequest> action)
+        public UciImpl(Action<UciRequest, string> action)
         {
             _action = action;
         }
 
         public override Task<UciReply> SendUciMessage(UciRequest request, ServerCallContext context)
         {
-            _action(request);
+            _action(request, "network");
             return Task.FromResult(new UciReply());
         }
     }

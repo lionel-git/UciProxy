@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 namespace UciProxy
 {
     public interface IReceiver
-    {     
+    {
+        void WaitForExit();
     }
 }

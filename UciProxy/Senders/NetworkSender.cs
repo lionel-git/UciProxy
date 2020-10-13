@@ -14,6 +14,7 @@ namespace UciProxy
 
         public NetworkSender(string address, int port)
         {
+            Helpers.WaitForServer(address, port, 60);
             var channel = new Channel($"{address}:{port}", ChannelCredentials.Insecure);
             _client = new Uci.UciClient(channel);
         }

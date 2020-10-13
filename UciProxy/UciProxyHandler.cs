@@ -37,17 +37,22 @@ namespace UciProxy
             _sender = HandlerFactory.GetSender(output);
         }
 
-        void Receive(UciRequest r)
+        void Receive(UciRequest r, string name)
         {
             _lines.Enqueue(r);
             if (_logExchange)
-                Logger.Info($"=> {r}");
+                Logger.Info($"{name} {r}");
         }
 
         public void Stop()
         {
             _stop = true;
             _queueSenderTask.Wait();
+        }
+
+        public void WaitReceiverExit()
+        {
+            _receiver.WaitForExit();
         }
 
         private void SendLines()

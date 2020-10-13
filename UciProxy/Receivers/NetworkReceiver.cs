@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace UciProxy
@@ -11,7 +12,7 @@ namespace UciProxy
     {
         private Server _server;
 
-        public NetworkReceiver(int port, Action<UciRequest> action)
+        public NetworkReceiver(int port, Action<UciRequest, string> action)
         {
             _server = new Server
             {
@@ -19,6 +20,12 @@ namespace UciProxy
                 Ports = { new ServerPort("0.0.0.0", port, ServerCredentials.Insecure) }
             };
             _server.Start();
+        }
+
+        // A voir 
+        public void WaitForExit()
+        {
+            Thread.Sleep(10_000_000);
         }
     }
 }

@@ -15,13 +15,13 @@ namespace UciProxy
 
         private Task _readInputTask;
        
-        public ConsoleReceiver(Action<UciRequest> action)
+        public ConsoleReceiver(Action<UciRequest, string> action)
         {
             var stream = new StreamReader(Console.OpenStandardInput());
             _readInputTask = Task.Run(() => ReadStream(stream, DataType.Stdout, action, "CONSOLE_RECEIVER"));            
         }
 
-        public static void ReadStream(TextReader reader, DataType dataType, Action<UciRequest> action, string name)
+        public static void ReadStream(TextReader reader, DataType dataType, Action<UciRequest, string> action, string name)
         {
             try
             {
@@ -36,7 +36,7 @@ namespace UciProxy
                             DataType = dataType,
                             Data = line
                         };
-                        action(uciRequest);
+                        action(uciRequest, name);
                     }
                 }
                 while (line != null);
@@ -46,6 +46,11 @@ namespace UciProxy
             {
                 Logger.Error($"{e}");
             }
+        }
+
+        public void WaitForExit()
+        {
+            _readInputTask.Wait();
         }
     }
 }

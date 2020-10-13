@@ -5,7 +5,7 @@ namespace UciProxy
 {
     public class HandlerFactory
     {
-        public static IReceiver GetReceiver(Source source, Action<UciRequest> action)
+        public static IReceiver GetReceiver(Source source, Action<UciRequest, string> action)
         {
             switch (source.SourceType)
             {
