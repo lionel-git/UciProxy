@@ -29,13 +29,8 @@ namespace UciProxy
         {
             _logExchange = config.LogExchange;
             _lines = new ConcurrentQueue<UciRequest>();
-
             _stop = false;
             _queueSenderTask = Task.Run(() => SendLines());
-
-            // 2 threads
-            // Input => lines (IReceiver depend de Source input)
-            // lines => output (ISender depend de Source output)
             var input = revertDirection ? config.Output : config.Input;
             var output = revertDirection ? config.Input : config.Output;
             _receiver = HandlerFactory.GetReceiver(input, Receive);
@@ -62,9 +57,7 @@ namespace UciProxy
                 do
                 {
                     if (_lines.TryDequeue(out UciRequest uciRequest))
-                    {
                         _sender.Send(uciRequest);
-                    }
                     else
                         Thread.Sleep(10);
                 }
