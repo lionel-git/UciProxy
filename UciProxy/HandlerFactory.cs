@@ -10,11 +10,11 @@ namespace UciProxy
             switch (source.SourceType)
             {
                 case SourceType.EXECUTABLE:
-                   return new SubProcessConsoleReader(source.Address, action);
+                   return new SubProcessConsoleReceiver(source.Address, action);
                 case SourceType.NETWORK:
                     return new NetworkReceiver(source.Port, action);
                 case SourceType.CONSOLE:
-                    throw new NotImplementedException("Reading from console is not implemented");
+                    return new ConsoleReceiver(action);
                 default:
                     throw new Exception($"Unhandled case: {source.SourceType}");
             }
@@ -25,11 +25,11 @@ namespace UciProxy
             switch (source.SourceType)
             {
                 case SourceType.CONSOLE:
-                    return new ConsoleWriter();
+                    return new ConsoleSender();
                 case SourceType.NETWORK:
                     return new NetworkSender(source.Address, source.Port);
                 case SourceType.EXECUTABLE:
-                    throw new NotImplementedException("writing to executable  is not implemented");
+                    return new SubProcessConsoleSender(source.Address);
                 default:
                     throw new Exception($"Unhandled case: {source.SourceType}");
             }

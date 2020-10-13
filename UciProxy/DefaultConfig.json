@@ -1,11 +1,11 @@
 ﻿{
   "Input": {
-    "SourceType": "CONSOLE",
-    "Address": "c:\\toto"
+    "SourceType": "EXECUTABLE",
+    "Address": "C:\\Program Files (x86)\\Arena\\Engines\\Stockfish\\stockfish_20100519_x64_bmi2.exe"
   },
   "Output": {
     "SourceType": "CONSOLE",
-    "Address": "c:\\toto"
+    "Address": ""
   },
   "LogExchange": true
 }

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using log4net;
+using System.Threading;
 
 namespace UciProxy
 {
@@ -14,7 +15,9 @@ namespace UciProxy
 
         static void WaitForQuit()
         {
-            while (Console.ReadKey(true).KeyChar != 'q') ;
+            // A voir
+            Thread.Sleep(100_000_000);
+            //while (Console.ReadKey(false).KeyChar != '&') ;
         }
 
         static void Main(string[] args)
@@ -23,9 +26,14 @@ namespace UciProxy
             {
                 Logger.Info("Starting...");
                 var config = BaseConfig.LoadAll<Config>("DefaultConfig.json", args);
-                var uciProxyHandler = new UciProxyHandler(config);
-                WaitForQuit();
-                uciProxyHandler.Stop();
+                if (!config.Help)
+                {
+                    var uciProxyHandlerForward = new UciProxyHandler(config, false);
+                    var uciProxyHandlerReverse = new UciProxyHandler(config, true);
+                    WaitForQuit();
+                    uciProxyHandlerForward.Stop();
+                    uciProxyHandlerReverse.Stop();
+                }
                 Logger.Info("End.");
             }
             catch (Exception e)

@@ -25,7 +25,7 @@ namespace UciProxy
 
         private bool _logExchange;
 
-        public UciProxyHandler(Config config)
+        public UciProxyHandler(Config config, bool revertDirection)
         {
             _logExchange = config.LogExchange;
             _lines = new ConcurrentQueue<UciRequest>();
@@ -36,8 +36,10 @@ namespace UciProxy
             // 2 threads
             // Input => lines (IReceiver depend de Source input)
             // lines => output (ISender depend de Source output)
-            _receiver = HandlerFactory.GetReceiver(config.Input, Receive);
-            _sender = HandlerFactory.GetSender(config.Output);
+            var input = revertDirection ? config.Output : config.Input;
+            var output = revertDirection ? config.Input : config.Output;
+            _receiver = HandlerFactory.GetReceiver(input, Receive);
+            _sender = HandlerFactory.GetSender(output);
         }
 
         void Receive(UciRequest r)

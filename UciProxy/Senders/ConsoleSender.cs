@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace UciProxy
 {
-    public class ConsoleWriter : ISender
+    public class ConsoleSender : ISender
     {
-        public ConsoleWriter()
+        public ConsoleSender()
         {
         }
 
