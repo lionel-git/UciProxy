@@ -10,7 +10,7 @@ namespace UciProxy
 {
     public class NetworkReceiver : IReceiver
     {
-        private Server _server;
+        private readonly Server _server;
 
         public NetworkReceiver(int port, Action<UciRequest, string> action)
         {

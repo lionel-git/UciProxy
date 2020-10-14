@@ -14,16 +14,16 @@ namespace UciProxy
     {
         private static readonly ILog Logger = LogManager.GetLogger("UciProxyHandler");
 
-        private ConcurrentQueue<UciRequest> _lines;
+        private readonly ConcurrentQueue<UciRequest> _lines;
 
-        private IReceiver _receiver;
-        private ISender _sender;
+        private readonly IReceiver _receiver;
+        private readonly ISender _sender;
 
-        private ThreadWrapper _queueSenderThread;
+        private readonly ThreadWrapper _queueSenderThread;
 
         private bool _stop;
 
-        private bool _logExchange;
+        private readonly bool _logExchange;
 
         public UciProxyHandler(Config config, bool revertDirection)
         {

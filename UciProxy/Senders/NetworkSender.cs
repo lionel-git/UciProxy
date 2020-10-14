@@ -10,7 +10,7 @@ namespace UciProxy
 {
     class NetworkSender : ISender
     {
-        private Uci.UciClient _client;
+        private readonly Uci.UciClient _client;
 
         public NetworkSender(string address, int port)
         {
@@ -21,7 +21,7 @@ namespace UciProxy
 
         public void Send(UciRequest uciRequest)
         {
-            var reply = _client.SendUciMessage(uciRequest);
+            _client.SendUciMessage(uciRequest);
         }
     }
 }

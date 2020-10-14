@@ -11,11 +11,9 @@ namespace UciProxy
 {
     public class SubProcessConsoleReceiver : IReceiver
     {
-        private static readonly ILog Logger = LogManager.GetLogger("SubProcessConsoleReader2");
-
-        private Process _process;
-        private ThreadWrapper _readOutputThread;
-        private ThreadWrapper _readErrorThread;
+        private readonly Process _process;
+        private readonly ThreadWrapper _readOutputThread;
+        private readonly ThreadWrapper _readErrorThread;
 
         public SubProcessConsoleReceiver(string executablePath, Action<UciRequest, string> action)
         {

@@ -12,9 +12,9 @@ namespace UciProxy
     {
         private static readonly ILog Logger = LogManager.GetLogger("ThreadWrapper");
 
-        private Action _action;
+        private readonly Action _action;
         private Thread _thread;
-        private string _name;
+        private readonly string _name;
 
         public string ThreadName => $"{_name}({_thread.ManagedThreadId})";
 
@@ -57,8 +57,6 @@ namespace UciProxy
 
         public void Abort()
         {
-            //
-
             _thread.Abort();
         }
     }

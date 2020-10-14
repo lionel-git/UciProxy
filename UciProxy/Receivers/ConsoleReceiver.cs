@@ -14,7 +14,7 @@ namespace UciProxy
     {
         private static readonly ILog Logger = LogManager.GetLogger("ConsoleReceiver");
 
-        private ThreadWrapper _readInputThread;
+        private readonly ThreadWrapper _readInputThread;
        
         public ConsoleReceiver(Action<UciRequest, string> action)
         {

@@ -9,7 +9,7 @@ namespace UciProxy
 {
     public class UciImpl : Uci.UciBase
     {
-        private Action<UciRequest, string> _action;
+        private readonly Action<UciRequest, string> _action;
 
         public UciImpl(Action<UciRequest, string> action)
         {

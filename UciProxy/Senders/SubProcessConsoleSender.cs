@@ -9,7 +9,7 @@ namespace UciProxy
 {
     public class SubProcessConsoleSender : ISender
     {
-        private Process _process;
+        private readonly Process _process;
 
         public SubProcessConsoleSender(string executablePath)
         {

@@ -10,7 +10,7 @@ namespace UciProxy
 {
     public static class ProcessManager
     {
-        private static ConcurrentDictionary<string, Process> _processes = new ConcurrentDictionary<string, Process>();
+        private static readonly ConcurrentDictionary<string, Process> _processes = new ConcurrentDictionary<string, Process>();
 
         public static Process GetProcess(string path)
         {
