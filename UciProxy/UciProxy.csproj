@@ -97,6 +97,7 @@
     <Compile Include="Source.cs" />
     <Compile Include="Receivers\SubProcessConsoleReceiver.cs" />
     <Compile Include="Senders\SubProcessConsoleSender.cs" />
+    <Compile Include="ThreadWrapper.cs" />
     <Compile Include="UciImpl.cs" />
     <Compile Include="UciProxyHandler.cs" />
   </ItemGroup>
