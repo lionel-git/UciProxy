@@ -19,7 +19,7 @@ namespace UciProxy
         private IReceiver _receiver;
         private ISender _sender;
 
-        private Task _queueSenderTask;
+        private ThreadWrapper _queueSenderThread;
 
         private bool _stop;
 
@@ -30,7 +30,7 @@ namespace UciProxy
             _logExchange = config.LogExchange;
             _lines = new ConcurrentQueue<UciRequest>();
             _stop = false;
-            _queueSenderTask = Task.Run(() => SendLines());
+            _queueSenderThread = new ThreadWrapper(() => SendLines(), "LineSender");
             var input = revertDirection ? config.Output : config.Input;
             var output = revertDirection ? config.Input : config.Output;
             _receiver = HandlerFactory.GetReceiver(input, Receive);
@@ -47,12 +47,13 @@ namespace UciProxy
         public void Stop()
         {
             _stop = true;
-            _queueSenderTask.Wait();
+            _queueSenderThread.Join();
+            _receiver.Stop();
         }
 
         public void WaitReceiverExit()
         {
-            _receiver.WaitForExit();
+             _receiver.WaitForExit();
         }
 
         private void SendLines()

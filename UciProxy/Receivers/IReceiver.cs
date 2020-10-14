@@ -9,5 +9,6 @@ namespace UciProxy
     public interface IReceiver
     {
         void WaitForExit();
+        void Stop();
     }
 }

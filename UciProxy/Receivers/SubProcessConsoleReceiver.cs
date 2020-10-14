@@ -14,19 +14,26 @@ namespace UciProxy
         private static readonly ILog Logger = LogManager.GetLogger("SubProcessConsoleReader2");
 
         private Process _process;
-        private Task _readOutputTask;
-        private Task _readErrorTask;
+        private ThreadWrapper _readOutputThread;
+        private ThreadWrapper _readErrorThread;
 
         public SubProcessConsoleReceiver(string executablePath, Action<UciRequest, string> action)
         {
             _process = ProcessManager.GetProcess(executablePath);
-            _readOutputTask = Task.Run(() => ConsoleReceiver.ReadStream(_process.StandardOutput, DataType.Stdout, action, "SUB_PROCESS_STDOUT"));
-            _readErrorTask = Task.Run(() => ConsoleReceiver.ReadStream(_process.StandardError, DataType.Stderr, action, "SUB_PROCESS_STDERR"));
+            _readOutputThread = new ThreadWrapper(() => ConsoleReceiver.ReadStream(_process.StandardOutput, DataType.Stdout, action, "SUB_PROCESS_STDOUT"), "SubProcessStdout");
+            _readErrorThread = new ThreadWrapper(() => ConsoleReceiver.ReadStream(_process.StandardError, DataType.Stderr, action, "SUB_PROCESS_STDERR"), "SubProcessStderr");
+        }
+
+        public void Stop()
+        {
+            _readErrorThread.Abort();
+
         }
 
         public void WaitForExit()
         {
-            Task.WaitAll(_readOutputTask, _readErrorTask);
+            _readErrorThread.Join();
+            _readOutputThread.Join();
         }
     }
 }

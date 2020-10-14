@@ -22,6 +22,11 @@ namespace UciProxy
             _server.Start();
         }
 
+        public void Stop()
+        {
+            _server.ShutdownTask.Wait();
+        }
+
         // A voir 
         public void WaitForExit()
         {

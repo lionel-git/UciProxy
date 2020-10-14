@@ -16,33 +16,50 @@ namespace UciProxy
         private Thread _thread;
         private string _name;
 
-        public ThreadWrapper(Action action, string name)
+        public string ThreadName => $"{_name}({_thread.ManagedThreadId})";
+
+        public ThreadWrapper(Action action, string name, bool start = true)
         {
             _action = action;
             _name = name;
+            if (start)
+                Start();
         }
-
+        
         private void Run()
         {
             try
             {
                 _action();
+                Logger.Info($"Exit thread: {ThreadName}");
+            }
+            catch (ThreadAbortException)
+            {
+                Logger.Info($"thread '{ThreadName}' was aborted.");
             }
             catch (Exception e)
             {
-                Logger.Error($"Exception in thread {_name}:\n{e}");
+                Logger.Error($"Exception in thread {ThreadName}:\n{e}");
             }
         }
 
         public void Start()
         {
             _thread = new Thread(Run);
+            Logger.Info($"Starting {ThreadName}");
             _thread.Start();
         }
 
         public void Join()
         {
             _thread.Join();
+        }
+
+        public void Abort()
+        {
+            //
+
+            _thread.Abort();
         }
     }
 }
