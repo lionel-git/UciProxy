@@ -12,5 +12,9 @@ namespace UciProxy
         public Source Input { get; set; }
         public Source Output { get; set; }
         public bool LogExchange { get; set; }
+
+        // Delay in Ms used for spinlock, default to 10 ms
+        public int DelayMs { get; set; }
+
     }
 }

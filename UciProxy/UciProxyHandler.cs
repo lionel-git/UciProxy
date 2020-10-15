@@ -25,6 +25,8 @@ namespace UciProxy
 
         private readonly bool _logExchange;
 
+        private int _delayMs;
+
         public UciProxyHandler(Config config, bool revertDirection)
         {
             _logExchange = config.LogExchange;
@@ -35,6 +37,7 @@ namespace UciProxy
             var output = revertDirection ? config.Input : config.Output;
             _receiver = HandlerFactory.GetReceiver(input, Receive);
             _sender = HandlerFactory.GetSender(output);
+            _delayMs = config.DelayMs > 0 ? config.DelayMs : 10;
         }
 
         void Receive(UciRequest r, string name)
@@ -65,7 +68,7 @@ namespace UciProxy
                     if (_sender != null && _lines.TryDequeue(out UciRequest uciRequest))
                         _sender.Send(uciRequest);
                     else
-                        Thread.Sleep(10);
+                        Thread.Sleep(_delayMs);
                 }
                 while (!_stop);
             }
