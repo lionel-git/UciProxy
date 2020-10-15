@@ -1,4 +1,6 @@
 ﻿Add direction of message in the log
 some msg in callback
 
-Auniveau reseau, il faut attendre le démarrage du serveur distant (client.connect)
+Au niveau reseau, il faut attendre le démarrage du serveur distant (client.connect)
+
+Passer en core
