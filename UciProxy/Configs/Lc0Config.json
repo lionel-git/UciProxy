@@ -1,11 +1,10 @@
 ﻿{
   "Input": {
     "SourceType": "EXECUTABLE",
-    "Address": "C:\\Program Files (x86)\\Arena\\Engines\\lc0_26_3\\lc0.exe"
+    "ExecutablePath": "C:\\Program Files (x86)\\Arena\\Engines\\lc0_26_3\\lc0.exe"
   },
   "Output": {
-    "SourceType": "CONSOLE",
-    "Address": ""
+    "SourceType": "CONSOLE"
   },
   "LogExchange": true
 }

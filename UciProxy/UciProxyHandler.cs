@@ -62,7 +62,7 @@ namespace UciProxy
             {
                 do
                 {
-                    if (_lines.TryDequeue(out UciRequest uciRequest))
+                    if (_sender != null && _lines.TryDequeue(out UciRequest uciRequest))
                         _sender.Send(uciRequest);
                     else
                         Thread.Sleep(10);

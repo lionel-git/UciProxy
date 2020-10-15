@@ -4,7 +4,10 @@
     "ExecutablePath": "C:\\Program Files (x86)\\Arena\\Engines\\Stockfish\\stockfish_20100519_x64_bmi2.exe"
   },
   "Output": {
-    "SourceType": "CONSOLE"
+    "SourceType": "NETWORK",
+    "LocalPort": 33002,
+    "RemoteHost": "localhost",
+    "RemotePort": 15001
   },
   "LogExchange": true
 }

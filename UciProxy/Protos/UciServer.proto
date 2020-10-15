@@ -3,6 +3,7 @@
 service Uci 
 {
   rpc SendUciMessage (UciRequest) returns (UciReply) {}
+  rpc SendHeartbeat (HeartbeatRequest) returns (HeartbeatReply) {}
 }
 
 enum DataType
@@ -21,3 +22,12 @@ message UciRequest
 message UciReply
 {
 }
+
+message HeartbeatRequest 
+{
+}
+
+message HeartbeatReply
+{
+}
+

@@ -1,4 +1,6 @@
 ﻿using Grpc.Core;
+using log4net;
+using log4net.Repository.Hierarchy;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +12,8 @@ namespace UciProxy
 {
     public class NetworkReceiver : IReceiver
     {
+        private static readonly ILog Logger = LogManager.GetLogger("NetworkReceiver");
+
         private readonly Server _server;
 
         public NetworkReceiver(int port, Action<UciRequest, string> action)
@@ -24,12 +28,15 @@ namespace UciProxy
 
         public void Stop()
         {
-            _server.ShutdownTask.Wait();
+            Logger.Info("Stopping grpc server...");
+            _server.ShutdownAsync().Wait();
+            Logger.Info("Server stopped");
         }
 
         // A voir 
         public void WaitForExit()
         {
+            Logger.Info("In NetworkReceiver.WaitForExit()");
             Thread.Sleep(10_000_000);
         }
     }

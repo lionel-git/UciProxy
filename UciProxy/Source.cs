@@ -14,12 +14,11 @@ namespace UciProxy
     {
         [JsonConverter(typeof(StringEnumConverter))]
         public SourceType SourceType { get; set; }
-       
-        // path for executable type
-        public string Address { get; set; }
+
+        public string ExecutablePath { get; set; }
         
-        // For network type only
-        public int LocalPort { get; set; }
+        public string RemoteHost { get; set; }
         public int RemotePort { get; set; }
+        public int LocalPort { get; set; }        
     }
 }

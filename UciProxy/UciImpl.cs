@@ -21,5 +21,11 @@ namespace UciProxy
             _action(request, "network");
             return Task.FromResult(new UciReply());
         }
+
+        public override Task<HeartbeatReply> SendHeartbeat(HeartbeatRequest request, ServerCallContext context)
+        {         
+            return Task.FromResult(new HeartbeatReply());
+        }
+
     }
 }

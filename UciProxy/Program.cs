@@ -19,6 +19,7 @@ namespace UciProxy
             {
                 Logger.Info("Starting...");
                 var config = BaseConfig.LoadAll<Config>("DefaultConfig.json", args);
+                Logger.Info($"config: {config}");
                 if (!config.Help)
                 {
                     var uciProxyHandlerForward = new UciProxyHandler(config, false);

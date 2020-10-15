@@ -10,7 +10,7 @@ namespace UciProxy
             switch (source.SourceType)
             {
                 case SourceType.EXECUTABLE:
-                   return new SubProcessConsoleReceiver(source.Address, action);
+                   return new SubProcessConsoleReceiver(source.ExecutablePath, action);
                 case SourceType.NETWORK:
                     return new NetworkReceiver(source.LocalPort, action);
                 case SourceType.CONSOLE:
@@ -27,9 +27,9 @@ namespace UciProxy
                 case SourceType.CONSOLE:
                     return new ConsoleSender();
                 case SourceType.NETWORK:
-                    return new NetworkSender(source.Address, source.RemotePort);
+                    return new NetworkSender(source.RemoteHost, source.RemotePort);
                 case SourceType.EXECUTABLE:
-                    return new SubProcessConsoleSender(source.Address);
+                    return new SubProcessConsoleSender(source.ExecutablePath);
                 default:
                     throw new Exception($"Unhandled case: {source.SourceType}");
             }
