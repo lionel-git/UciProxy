@@ -24,7 +24,9 @@ namespace UciProxy
 
         public override Task<HeartbeatReply> SendHeartbeat(HeartbeatRequest request, ServerCallContext context)
         {         
-            return Task.FromResult(new HeartbeatReply());
+            if (request.StopRequested)
+                Environment.Exit(0);
+            return Task.FromResult(new HeartbeatReply() { StopAck = request.StopRequested });
         }
 
     }

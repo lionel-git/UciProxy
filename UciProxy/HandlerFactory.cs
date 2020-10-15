@@ -27,7 +27,7 @@ namespace UciProxy
                 case SourceType.CONSOLE:
                     return new ConsoleSender();
                 case SourceType.NETWORK:
-                    return new NetworkSender(source.RemoteHost, source.RemotePort);
+                    return new NetworkSender(source.RemoteHost, source.RemotePort, source.ConnectionTimeOut, source.HeartbeatTimeOut);
                 case SourceType.EXECUTABLE:
                     return new SubProcessConsoleSender(source.ExecutablePath);
                 default:

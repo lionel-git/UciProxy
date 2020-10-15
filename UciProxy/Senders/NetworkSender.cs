@@ -19,12 +19,14 @@ namespace UciProxy
         private readonly Channel _channel;
         private readonly ThreadWrapper _heartbeatThread;
 
-        public NetworkSender(string host, int port)
+        public NetworkSender(string host, int port, int connectionTimeOut, int heartbeatTimeOut)
         {
-            Helpers.WaitForServer(host, port, 60);
+            if (connectionTimeOut <= 0)
+                connectionTimeOut = 60;
+            Helpers.WaitForServer(host, port, connectionTimeOut);
             _channel = new Channel($"{host}:{port}", ChannelCredentials.Insecure);
             _client = new Uci.UciClient(_channel);
-            _heartbeatThread = new ThreadWrapper(() => CheckHeartbeat(), "Checkheartbeat");
+            _heartbeatThread = new ThreadWrapper(() => CheckHeartbeat(heartbeatTimeOut), "Checkheartbeat");
         }
 
         public void Send(UciRequest uciRequest)
@@ -32,13 +34,18 @@ namespace UciProxy
             _client.SendUciMessage(uciRequest);
         }
 
-        public void CheckHeartbeat()
+        public void CheckHeartbeat(int heartbeatTimeOut)
         {
             try
             {
+                if (heartbeatTimeOut <= 0)
+                    heartbeatTimeOut = 5;
                 do
-                {                   
-                    _client.SendHeartbeat(new HeartbeatRequest());
+                {
+                    var deadline = DateTime.UtcNow.AddSeconds(heartbeatTimeOut);
+                    Logger.Debug("Check hearbeat...");
+                    _client.SendHeartbeat(new HeartbeatRequest(), null, deadline);
+                    Logger.Debug("Hearbeat ok.");
                     Thread.Sleep(1000);
                 }
                 while (true);

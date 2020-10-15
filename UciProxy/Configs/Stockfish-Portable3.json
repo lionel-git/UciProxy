@@ -1,0 +1,13 @@
+{
+  "Input": {
+    "SourceType": "EXECUTABLE",
+    "ExecutablePath": "C:\\Program Files (x86)\\Arena\\Engines\\Stockfish\\stockfish_20100519_x64_bmi2.exe"
+  },
+  "Output": {
+    "SourceType": "NETWORK",
+    "LocalPort": 33002,
+    "RemoteHost": "192.168.0.20",
+    "RemotePort": 15001
+  },
+  "LogExchange": true
+}

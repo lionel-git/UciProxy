@@ -16,9 +16,15 @@ namespace UciProxy
         public SourceType SourceType { get; set; }
 
         public string ExecutablePath { get; set; }
-        
+
         public string RemoteHost { get; set; }
         public int RemotePort { get; set; }
-        public int LocalPort { get; set; }        
+        public int LocalPort { get; set; }
+
+        // Delay in seconds for checking connection
+        public int HeartbeatTimeOut { get; set; }
+
+        // Delay in seconds to wait for connection
+        public int ConnectionTimeOut { get; set; }
     }
 }

@@ -25,9 +25,10 @@ message UciReply
 
 message HeartbeatRequest 
 {
+	bool stop_requested = 1;
 }
 
 message HeartbeatReply
 {
+	bool stop_ack = 1;
 }
-
