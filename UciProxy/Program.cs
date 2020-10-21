@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using log4net;
 using System.Threading;
+using System.IO;
 
 namespace UciProxy
 {
@@ -17,6 +18,7 @@ namespace UciProxy
         {
             try
             {
+                log4net.Config.XmlConfigurator.Configure(new FileInfo("log4net.config"));
                 Logger.Info("Starting...");
                 var config = BaseConfig.LoadAll<Config>("DefaultConfig.json", args);
                 Logger.Info($"config: {config}");
