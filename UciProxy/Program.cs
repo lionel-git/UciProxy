@@ -20,6 +20,8 @@ namespace UciProxy
             {
                 log4net.Config.XmlConfigurator.Configure(new FileInfo("log4net.config"));
                 Logger.Info("Starting...");
+                Helpers.GetRuntimeInfo(out Version clrRuntimeVersion, out string fwDescription);
+                Logger.Info($"Clr: {clrRuntimeVersion} | {fwDescription}");
                 var config = BaseConfig.LoadAll<Config>("DefaultConfig.json", args);
                 Logger.Info($"config: {config}");
                 if (!config.Help)

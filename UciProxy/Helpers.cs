@@ -7,6 +7,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Runtime.InteropServices;
 
 namespace UciProxy
 {
@@ -35,5 +36,12 @@ namespace UciProxy
             }
             return false;
         }
+
+        public static void GetRuntimeInfo(out Version clrRuntimeVersion, out string fwDescription)
+        {
+            clrRuntimeVersion = Environment.Version; 
+            fwDescription = RuntimeInformation.FrameworkDescription;
+        }
+
     }
 }
