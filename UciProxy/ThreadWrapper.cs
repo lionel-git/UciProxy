@@ -57,7 +57,15 @@ namespace UciProxy
 
         public void Abort()
         {
-            _thread.Abort();
+            try
+            {
+                _thread.Abort();
+            }
+            catch (PlatformNotSupportedException e)
+            {
+                Logger.Error($"To be refactored: {e.Message}");
+                Environment.Exit(-1);
+            }
         }
     }
 }
